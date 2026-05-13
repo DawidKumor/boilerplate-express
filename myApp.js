@@ -28,7 +28,20 @@ app.get("/json", function (req, res) {
         res.json({ "message": "Hello json" })
     }
 
-})
+});
+
+app.get("/now", function(req, res, next) {
+    req.time = new Date().toString();
+    next();
+}, function(req, res) {
+    res.json({time: req.time})
+}
+);
+
+app.get("/:word/echo", function(req, res) {
+    res.json({echo: req.params.word});
+});
+
 console.log("Hello World")
 
 
